@@ -17,7 +17,7 @@ echo "Fetching dependencies..."
 (cd $DIR/../scripts/ && ./brew_dependencies.sh 2>/dev/null)
 
 # Set QT dir for homebrewed version
-export QT_DIR=/usr/local/opt/qt/lib/cmake/Qt5/
+export Qt5_DIR=/usr/local/opt/qt/lib/cmake/Qt5/
 
 
 # Remove CMake-generated files that should be regenerated
