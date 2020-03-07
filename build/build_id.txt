@@ -1,0 +1,3 @@
+Default example-module Build ID
+
+This version of example-module was built manually or Jenkins has failed to replace this file with a valid build ID.
