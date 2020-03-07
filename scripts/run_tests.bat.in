@@ -1,0 +1,9 @@
+@echo OFF
+echo Running DEBUG tests:
+"@CMAKE_COMMAND@" -E env "@vs_debugger_environment@" "@CMAKE_BINARY_DIR@/Debug/example-module_tests_appd.exe"
+echo DEBUG tests complete. Preparing to run RELEASE tests...
+@pause
+echo Running RELEASE tests:
+"@CMAKE_COMMAND@" -E env "@vs_debugger_environment@" "@CMAKE_BINARY_DIR@/Release/example-module_tests_app.exe"
+echo RELEASE tests complete.
+@pause

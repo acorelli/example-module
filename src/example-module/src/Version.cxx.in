@@ -1,0 +1,75 @@
+#include <example-module/Version.h>
+
+#include <string>
+
+namespace example_module {
+namespace Version {
+
+const std::string getVersionComponent(const char* const componentString);
+
+std::string major()
+{
+	return getVersionComponent("@PROJECT_VERSION_MAJOR@");
+}
+
+std::string minor()
+{
+	return getVersionComponent("@PROJECT_VERSION_MINOR@");
+}
+
+std::string patch()
+{
+	return getVersionComponent("@PROJECT_VERSION_PATCH@");
+}
+
+std::string tweak()
+{
+	return getVersionComponent("@PROJECT_VERSION_TWEAK@");
+}
+
+std::string string(VersionFormat format)
+{
+	std::string str = "";
+	switch (format)
+	{
+		case VersionFormat::MajorMinorPatchTweak:
+			str.insert(0, tweak());
+			str.insert(0, ".");
+		case VersionFormat::MajorMinorPatch:
+			str.insert(0 , patch());
+			str.insert(0, ".");
+		default:
+		case VersionFormat::MajorMinor:
+			str.insert(0, minor());
+			str.insert(0, ".");
+		case VersionFormat::Major:
+			str.insert(0, major());
+	}
+	
+	return str;
+}
+
+std::string defaultWindowTitle( VersionFormat format ) {
+	return "example-module v" + string( format );
+}
+
+
+const std::string getVersionComponent(const char* const componentString)
+{
+	const bool isEmpty = (std::strlen(componentString) > 0LL);
+
+	return (isEmpty ? componentString : "0");
+}
+
+std::string getCommitLongHash()
+{
+	return "@GIT_COMMIT_LONG_HASH@";
+}
+
+std::string getCommitShortHash()
+{
+	return "@GIT_COMMIT_SHORT_HASH@";
+}
+
+} // namespace Version
+} // namespace example_module

@@ -1,0 +1,73 @@
+/****************************************************************************
+** VersionTest.cpp
+**
+** Created by CMake: configure_file(
+**							${CMAKE_CURRENT_LIST_DIR}/VersionTest.cpp.in
+**							${CMAKE_CURRENT_BINARY_DIR}/src/VersionTest.cpp
+**							@ONLY
+**					 )
+**
+** WARNING! All changes made in this file will be lost!
+*****************************************************************************/
+
+#include <example-module/Version.h>
+#include <gtest/gtest.h>
+
+#include <algorithm>
+
+TEST( Version, Major_Equals_CMakeVar_PROJECT_VERSION_MAJOR )
+{
+	EXPECT_STREQ( example_module::Version::major().c_str(), "@PROJECT_VERSION_MAJOR@" );
+}
+
+TEST( Version, Minor_Equals_CMakeVar_PROJECT_VERSION_MINOR )
+{
+	EXPECT_STREQ( example_module::Version::minor().c_str(), "@PROJECT_VERSION_MINOR@" );
+}
+
+TEST( Version, Patch_Equals_CMakeVar_PROJECT_VERSION_PATCH )
+{
+	EXPECT_STREQ( example_module::Version::patch().c_str(), "@PROJECT_VERSION_PATCH@" );
+}
+
+TEST( Version, Tweak_Equals_CMakeVar_PROJECT_VERSION_TWEAK )
+{
+	EXPECT_STREQ( example_module::Version::tweak().c_str(), "@PROJECT_VERSION_TWEAK@" );
+}
+
+TEST( Version, String_Equals_CMakeVar_PROJECT_VERSION )
+{
+	EXPECT_STREQ( example_module::Version::string( example_module::VersionFormat::MajorMinorPatchTweak ).c_str(), "@PROJECT_VERSION@" );
+}
+
+TEST( Version, Hash_Equals_CMakeVar_GIT_COMMIT_LONG_HASH )
+{
+	// GIT_COMMIT_HASH is updated at CMAKE configure time
+	EXPECT_STRNE( "@GIT_COMMIT_LONG_HASH@", "" );
+	EXPECT_STRNE( example_module::Version::getCommitLongHash().c_str(), "" );
+	
+	EXPECT_STREQ( example_module::Version::getCommitLongHash().c_str(),
+	"@GIT_COMMIT_LONG_HASH@" );
+}
+
+TEST( Version, ShortHash_Equals_CMakeVar_GIT_COMMIT_SHORT_HASH )
+{
+	// GIT_COMMIT_HASH is updated at CMAKE configure time
+	EXPECT_STRNE( "@GIT_COMMIT_SHORT_HASH@", "" );
+	EXPECT_STRNE( example_module::Version::getCommitShortHash().c_str(), "" );
+	
+	EXPECT_STREQ( example_module::Version::getCommitShortHash().c_str(),
+	"@GIT_COMMIT_SHORT_HASH@" );
+}
+
+TEST( Version, ShortHash_Is_Prefix_Of_LongHash )
+{
+	std::string shortHash = example_module::Version::getCommitShortHash();
+	std::string longHash = example_module::Version::getCommitLongHash();
+	
+	// check mismatch between hashes
+	std::pair< std::string::const_iterator, std::string::const_iterator > result = std::mismatch( shortHash.cbegin(), shortHash.cend(), longHash.cbegin() );
+	
+	// check that first mismatch is the end of the short hash
+	EXPECT_EQ( result.first, shortHash.end() );
+}

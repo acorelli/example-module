@@ -1,0 +1,39 @@
+# File extensions marked as text should be normalized (converted to LF on all 
+# platforms) unless specified otherwise
+* text=auto
+
+# Scripts
+*.bash   text
+*.bat    text
+*.bat.in text
+*.cmd    text
+*.sh     text
+*.sh.in  text
+
+# C++ sources
+*.cpp    text diff=cpp
+*.cpp.in text diff=cpp
+*.h      text diff=cpp
+
+# Qt file types
+*.conf.in text
+*.qrc     text
+*.ui      text
+
+# Miscellaneous
+LICENSE text
+*.cmake text
+*.csv   text
+*.md    text
+*.rc    text
+*.txt   text
+
+# File extensions marked as binary should not be normalized
+
+# Image file types
+*.ico binary
+*.png binary
+
+# Video file types
+*.mp4 binary
+*.mpeg binary

@@ -1,0 +1,8 @@
+#!/bin/bash
+
+echo Running DEBUG tests:
+@CMAKE_BINARY_DIR@/Debug/example-module_tests_appd
+echo DEBUG tests complete.
+echo Running RELEASE tests:
+@CMAKE_BINARY_DIR@/Release/example-module_tests_app
+echo RELEASE tests complete.
