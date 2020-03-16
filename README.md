@@ -1,6 +1,4 @@
-# Example Module
-
-Example module build environment scripts  
+# `example-module`: Example Module Build Environment Scripts  
   
   
 ## Introduction  
