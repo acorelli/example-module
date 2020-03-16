@@ -18,6 +18,6 @@
     * #### OSX/Linux  
   
     For an OSX/Linux environment `example-module` is setup to use existing package managers to find/install the 3rd party libraries.  
-    It is currently setup to use [:link: `homebrew`](https://brew.sh/) for OSX to install the libraries.
+    `example-module` is currently setup to use [:link: `homebrew`](https://brew.sh/) for OSX to install the libraries.
 
 ## Modifications
