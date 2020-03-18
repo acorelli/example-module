@@ -3,9 +3,9 @@
 set ThirdPartyDir=%~f1
 if "%ThirdPartyDir%"=="" (
 	echo Default 3rd Party directory .\3rdParty being used
-	set ThirdPartyDir=%cd%\3rdParty
+	set ThirdPartyDir="%cd%\3rdParty"
 ) else (
-	echo Using %ThirdPartyDir% as 3rd Party directory
+	echo Using ^"%ThirdPartyDir%^" as 3rd Party directory
 )
 
 :: Create directory if it doesn't already exist
